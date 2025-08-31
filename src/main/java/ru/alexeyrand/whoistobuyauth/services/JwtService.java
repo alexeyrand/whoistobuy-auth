@@ -21,15 +21,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+
 public class JwtService {
     private final String secret;
 
     private final UserService userService;
 
     public User findUserByUsername(String username) {
-        return userService.findUserByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException(String.format("User '%s' not found", username))
-        );
+        return userService.findUserByUsername(username);
     }
 
     public JwtService(UserService userService) {
