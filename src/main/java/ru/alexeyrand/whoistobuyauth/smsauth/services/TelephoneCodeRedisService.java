@@ -1,6 +1,7 @@
 package ru.alexeyrand.whoistobuyauth.smsauth.services;
 
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import ru.alexeyrand.whoistobuyauth.smsauth.entities.TelephoneCode;
@@ -9,12 +10,12 @@ import java.time.Duration;
 
 @Service
 public class TelephoneCodeRedisService {
-    private final RedisTemplate<String, String> redisTemplate;
+    private final StringRedisTemplate redisTemplate;
     private final ValueOperations<String, String> valueOperations;
 
     private static final long EXPIRATION_TIME = 5;
 
-    public TelephoneCodeRedisService(RedisTemplate<String, String> redisTemplate) {
+    public TelephoneCodeRedisService(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
         this.valueOperations = redisTemplate.opsForValue();
     }
@@ -47,8 +48,8 @@ public class TelephoneCodeRedisService {
     /**
      * Удаляет код для указанного номера телефона
      */
-    public void deleteCode(String telephone) {
-        String key = (String) generateKey(telephone);
+    public void deleteCode(TelephoneCode telephoneCode) {
+        String key = generateKey(telephoneCode.getTelephone());
         redisTemplate.delete(key);
     }
 

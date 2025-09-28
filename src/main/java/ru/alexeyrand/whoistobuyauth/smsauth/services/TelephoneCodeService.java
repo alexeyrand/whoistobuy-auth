@@ -23,4 +23,13 @@ public class TelephoneCodeService {
         return code;
     }
 
+
+
+    public boolean verifyTelephoneCode(TelephoneCode telephoneCode) {
+        if (telephoneCodeRedisService.hasCode(telephoneCode)) {
+            telephoneCodeRedisService.deleteCode(telephoneCode);
+            return true;
+        }
+        return false;
+    }
 }
