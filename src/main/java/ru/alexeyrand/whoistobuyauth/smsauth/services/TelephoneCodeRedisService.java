@@ -3,6 +3,7 @@ package ru.alexeyrand.whoistobuyauth.smsauth.services;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import ru.alexeyrand.whoistobuyauth.smsauth.entities.TelephoneCode;
 
 import java.time.Duration;
 
@@ -21,8 +22,9 @@ public class TelephoneCodeRedisService {
     /**
      * Сохраняет код для указанного номера телефона на 5 минут
      */
-    public void saveCode(String telephone, String code) {
-        String key = (String) generateKey(telephone);
+    public void saveCode(TelephoneCode telephoneCode) {
+        String key =  generateKey(telephoneCode.getTelephone());
+        String code = telephoneCode.getCode();
         valueOperations.set(key, code, Duration.ofMinutes(EXPIRATION_TIME));
     }
 
@@ -37,8 +39,8 @@ public class TelephoneCodeRedisService {
     /**
      * Проверяет существование кода для номера телефона
      */
-    public boolean hasCode(String telephone) {
-        String key = (String) generateKey(telephone);
+    public boolean hasCode(TelephoneCode telephoneCode) {
+        String key = generateKey(telephoneCode.getTelephone());
         return Boolean.TRUE.equals(redisTemplate.hasKey(key));
     }
 
