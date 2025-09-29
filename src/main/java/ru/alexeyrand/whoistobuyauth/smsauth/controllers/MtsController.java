@@ -22,11 +22,13 @@ public class MtsController {
         log.info("Starting SMS code generation for telephone: {}", telephoneCode.getTelephone());
         String code = telephoneCodeService.generateTelephoneCode(telephoneCode);
         if (code == null) {
-            telephoneCode.setStatus("Code has already sent");
+            telephoneCode.setStatus("SUCCESS");
+            telephoneCode.setMessage("Code sent successfully");
             return ResponseEntity.ok(telephoneCode);
         }
-        log.info("SMS code generated successfully for telephone: {}", telephoneCode.getTelephone());
-        telephoneCode.setStatus("Code " + code + " sent by phone number: " + telephoneCode.getTelephone());
+        log.warn("Code already requested for telephone: {}", telephoneCode.getTelephone());
+        telephoneCode.setStatus("ALREADY_REQUESTED");
+        telephoneCode.setMessage("Code " + code + " sent by phone number: " + telephoneCode.getTelephone());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(telephoneCode);
     }
 

@@ -16,4 +16,5 @@ public class TelephoneCode {
     @Pattern(regexp = "\\d{6}", message = "Code must be 6 digits")
     private String code;
     private String status;
+    private String message;
 }
