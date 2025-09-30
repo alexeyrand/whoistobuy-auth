@@ -5,8 +5,8 @@
 //import io.jsonwebtoken.io.Decoders;
 //import io.jsonwebtoken.security.Keys;
 //import lombok.RequiredArgsConstructor;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+////import org.springframework.security.core.userdetails.UserDetails;
+////import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.stereotype.Service;
 //import ru.alexeyrand.whoistobuybase.entities.User;
 //import ru.alexeyrand.whoistobuybase.services.UserService;
@@ -24,7 +24,6 @@
 //
 //public class JwtService {
 //    private final String secret;
-//
 //    private final UserService userService;
 //
 //    public User findUserByUsername(String username) {
@@ -82,11 +81,11 @@
 //                .verifyWith(getKey())
 //                .build().parseSignedClaims(token).getPayload();
 //    }
-//
-//    public boolean validateToken(String token, UserDetails userDetails) {
-//        final String username = extractUsername(token);
-//        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-//    }
+////
+////    public boolean validateToken(String token, UserDetails userDetails) {
+////        final String username = extractUsername(token);
+////        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+////    }
 //
 //    private boolean isTokenExpired(String token) {
 //        return extractExpiration(token).before(new Date());

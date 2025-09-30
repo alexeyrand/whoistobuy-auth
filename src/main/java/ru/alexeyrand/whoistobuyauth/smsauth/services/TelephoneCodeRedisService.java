@@ -1,10 +1,9 @@
 package ru.alexeyrand.whoistobuyauth.smsauth.services;
 
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import ru.alexeyrand.whoistobuyauth.smsauth.entities.TelephoneCode;
+import ru.alexeyrand.whoistobuyauth.dtos.TelephoneCodeRequest;
 
 import java.time.Duration;
 
@@ -23,9 +22,9 @@ public class TelephoneCodeRedisService {
     /**
      * Сохраняет код для указанного номера телефона на 5 минут
      */
-    public void saveCode(TelephoneCode telephoneCode) {
-        String key =  generateKey(telephoneCode.getTelephone());
-        String code = telephoneCode.getCode();
+    public void saveCode(TelephoneCodeRequest telephoneCodeRequest) {
+        String key =  generateKey(telephoneCodeRequest.getTelephone());
+        String code = telephoneCodeRequest.getCode();
         valueOperations.set(key, code, Duration.ofMinutes(EXPIRATION_TIME));
     }
 
@@ -40,16 +39,16 @@ public class TelephoneCodeRedisService {
     /**
      * Проверяет существование кода для номера телефона
      */
-    public boolean hasCode(TelephoneCode telephoneCode) {
-        String key = generateKey(telephoneCode.getTelephone());
+    public boolean hasCode(TelephoneCodeRequest telephoneCodeRequest) {
+        String key = generateKey(telephoneCodeRequest.getTelephone());
         return Boolean.TRUE.equals(redisTemplate.hasKey(key));
     }
 
     /**
      * Удаляет код для указанного номера телефона
      */
-    public void deleteCode(TelephoneCode telephoneCode) {
-        String key = generateKey(telephoneCode.getTelephone());
+    public void deleteCode(TelephoneCodeRequest telephoneCodeRequest) {
+        String key = generateKey(telephoneCodeRequest.getTelephone());
         redisTemplate.delete(key);
     }
 
