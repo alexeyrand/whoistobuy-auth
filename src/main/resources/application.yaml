@@ -22,3 +22,6 @@ spring:
     properties:
       hibernate:
         format_sql:
+jwt:
+  secret: "my-super-secure-fixed-secret-key-256-bits-minimum-length-here"
+  expiration: 86400000 # 24 часа в миллисекундах
