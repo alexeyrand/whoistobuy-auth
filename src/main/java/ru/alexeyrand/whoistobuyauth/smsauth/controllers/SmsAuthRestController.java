@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.alexeyrand.whoistobuyauth.dtos.TelephoneCodeResponse;
 import ru.alexeyrand.whoistobuyauth.services.JwtSimpleService;
 import ru.alexeyrand.whoistobuyauth.dtos.TelephoneCodeRequest;
-import ru.alexeyrand.whoistobuyauth.smsauth.services.TelephoneCodeService;
+import ru.alexeyrand.whoistobuyauth.services.TelephoneCodeService;
 
 
 @RestController

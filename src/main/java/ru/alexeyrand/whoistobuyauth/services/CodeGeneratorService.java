@@ -1,4 +1,4 @@
-package ru.alexeyrand.whoistobuyauth.smsauth.services;
+package ru.alexeyrand.whoistobuyauth.services;
 
 import org.springframework.stereotype.Service;
 
